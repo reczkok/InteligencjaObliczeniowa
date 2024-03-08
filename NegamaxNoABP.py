@@ -1,8 +1,10 @@
+from easyAI import TranspositionTable
+
 LOWERBOUND, EXACT, UPPERBOUND = -1, 0, 1
 inf = float("infinity")
 
 
-def negamax_no_abp(game, depth, origDepth, scoring, alpha=+inf, beta=-inf, tt=None):
+def negamax_no_abp(game, depth, origDepth, scoring, alpha=+inf, beta=-inf, tt=TranspositionTable()):
     alphaOrig = alpha
 
     # Is there a transposition table and is this game in it ?

@@ -188,9 +188,9 @@ class Nim(TwoPlayerGame):
         else:
             return sum(self.player_2_times) / len(self.player_2_times)
 
-def run_game(ai1, ai2,n,f):
-    ai1 = NegamaxNoABP(3)
-    ai2 = Negamax(3)
+def run_game(n,f, depth=2):
+    ai1 = Negamax(depth)
+    ai2 = Negamax(depth)
 
     ai1_score = 0
     ai2_score = 0
@@ -219,7 +219,7 @@ def run_game(ai1, ai2,n,f):
     print(f"AI 1 avg time: {sum(ai1_times) / len(ai1_times)}")
     print(f"AI 2 avg time: {sum(ai2_times) / len(ai2_times)}")
 
-    f.write(f"{ai1_score};{ai2_score};{sum(ai1_times) / len(ai1_times)};{sum(ai2_times) / len(ai2_times)}\n")
+    f.write(f"{ai1_score},{ai2_score},{sum(ai1_times) / len(ai1_times)},{sum(ai2_times) / len(ai2_times)}\n")
 
 
 
@@ -227,15 +227,12 @@ if __name__ == "__main__":
 
     from easyAI import AI_Player
 
-    ai1 = NegamaxNoABP(3)
-    ai2 = Negamax(3)
-    N = 20
-    # open('data_depth5.csv', 'w').close()
-    # f = open("data_depth5.csv", "a")
-    open('data_depth3.csv', 'w').close()
-    f = open("data_depth3.csv", "a")
-    f.write("ai1_score;ai2_score;ai1_avg_time;ai2_avg_time\n")
 
-    for i in range(N):
-        print(f"--------------Game {i + 1}--------------")
-        run_game(ai1, ai2, 100, f)
+    for DEPTH in [10, 20]:
+        N = 1
+        open(f'data_depth{DEPTH}.csv', 'w').close()
+        f = open(f"data_depth{DEPTH}.csv", "a")
+        f.write("ai1_score,ai2_score,ai1_avg_time,ai2_avg_time\n")
+        for i in range(N):
+            print(f"--------------Game {i + 1}--------------")
+            run_game(50, f, DEPTH)

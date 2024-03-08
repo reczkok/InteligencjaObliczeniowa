@@ -7,9 +7,9 @@ import pickle
 
 LOWERBOUND, EXACT, UPPERBOUND = -1, 0, 1
 inf = float("infinity")
+from easyAI import TranspositionTable
 
-
-def negamax(game, depth, origDepth, scoring, alpha=+inf, beta=-inf, tt=None):
+def negamax(game, depth, origDepth, scoring, alpha=+inf, beta=-inf, tt=TranspositionTable()):
     """
     This implements Negamax with transposition tables.
     This method is not meant to be used directly. See ``easyAI.Negamax``
