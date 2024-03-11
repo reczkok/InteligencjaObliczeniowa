@@ -2,6 +2,8 @@ from easyAI import TwoPlayerGame
 import random
 import time
 from copy import deepcopy
+
+from Expectiminimax import Expectimax
 from NegamaxNoABP import NegamaxNoABP
 from Negamax import Negamax
 
@@ -189,7 +191,7 @@ class Nim(TwoPlayerGame):
             return sum(self.player_2_times) / len(self.player_2_times)
 
 def run_game(n,f, depth=2):
-    ai1 = Negamax(depth)
+    ai1 = Expectimax(depth)
     ai2 = Negamax(depth)
 
     ai1_score = 0
@@ -228,11 +230,11 @@ if __name__ == "__main__":
     from easyAI import AI_Player
 
 
-    for DEPTH in [10, 20]:
-        N = 1
-        open(f'data_depth{DEPTH}.csv', 'w').close()
+    for DEPTH in [3, 5]:
+        N = 100
+        open(f'data_depth{DEPTH}_expecti.csv', 'w').close()
         f = open(f"data_depth{DEPTH}.csv", "a")
         f.write("ai1_score,ai2_score,ai1_avg_time,ai2_avg_time\n")
         for i in range(N):
-            print(f"--------------Game {i + 1}--------------")
-            run_game(50, f, DEPTH)
+            print(f"--------------Game {i + 1}, Depth {DEPTH} --------------")
+            run_game(100, f, DEPTH)
